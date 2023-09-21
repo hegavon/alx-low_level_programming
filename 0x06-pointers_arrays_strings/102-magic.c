@@ -1,9 +1,8 @@
 #include <stdio.h>
-
 /**
  * main - Entry point
  *
- * Description: Prints 98 to the standard output
+ * Description: Prints number to the standard output
  *
  * Return: Always 0 (Success)
  */
