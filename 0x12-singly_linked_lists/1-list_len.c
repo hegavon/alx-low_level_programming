@@ -7,11 +7,11 @@
  */
 size_t list_len(const list_t *h)
 {
-	size_t element_count = 0;
+	size_t num_elements = 0;
 
 	for (; h != NULL; h = h->next)
 	{
-		element_count++;
+		num_elements++;
 	}
-	return (element_count);
+	return (num_elements);
 }
