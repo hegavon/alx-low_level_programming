@@ -1,33 +1,46 @@
 #include "main.h"
 
 /**
- * read_textfile - function that reads a text file and prints
- * @filename: File to be modified
- * @letters: The letters
- * Return: Always success
-*/
-
-ssize_t read_textfile(const char *filename, size_t letters);
+ * read_textfile - Reads a text file and prints it to the POSIX output
+ * @filename: Name of the file to be read
+ * @letters: Number of letters to read and print
+ * Return: The actual number of letters it could read and print
+ */
+ssize_t read_textfile(const char *filename, size_t letters)
 {
-	ssize_t opn, rd;
-
-	char *ptr;
+	int file_descriptor;
+	ssize_t bytes_read, bytes_written;
+	char *buffer;
 
 	if (filename == NULL)
 		return (0);
-	ptr = malloc(sizeof(char) * letters);
-	if (ptr == NULL)
+
+	file_descriptor = open(filename, O_RDONLY);
+	if (file_descriptor == -1)
 		return (0);
 
-	opn = open(filename, O_RDONLY);
-	rd = read(opn, ptr, letters);
-	write(STDOUT_FILENO, ptr, rd);
-	if (opn == -1 || rd == -1)
+	buffer = malloc(letters * sizeof(char));
+	if (buffer == NULL)
+		return (0);
+
+	bytes_read = read(file_descriptor, buffer, letters);
+	if (bytes_read == -1)
 	{
-		free(ptr);
+		free(buffer);
+		close(file_descriptor);
 		return (0);
 	}
-	free(ptr);
-	close(opn);
-	return (write);
+
+	bytes_written = write(STDOUT_FILENO, buffer, bytes_read);
+	if (bytes_written != bytes_read)
+	{
+		free(buffer);
+		close(file_descriptor);
+		return (0);
+	}
+
+	free(buffer);
+	close(file_descriptor);
+	return (bytes_written);
 }
+
