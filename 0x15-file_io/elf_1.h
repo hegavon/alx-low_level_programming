@@ -9,7 +9,7 @@
  *
  * Description: If the file is not an ELF file - exit code 98.
  */
-__home void check_elf(unsigned char *e_ident)
+void check_elf(unsigned char *e_ident)
 {
 	int index;
 
@@ -29,9 +29,10 @@ __home void check_elf(unsigned char *e_ident)
 /**
  * print_magic - Prints the magic numbers of an ELF header.
  * @e_ident: A pointer to an array containing the ELF magic numbers.
+ *
+ * Description: Magic numbers are separated by spaces.
  */
-
-__home void print_magic(unsigned char *e_ident)
+void print_magic(unsigned char *e_ident)
 {
 	int index;
 
@@ -52,8 +53,7 @@ __home void print_magic(unsigned char *e_ident)
  * print_class - Prints the class of an ELF header.
  * @e_ident: A pointer to an array containing the ELF class.
  */
-
-__home void print_class(unsigned char *e_ident)
+void print_class(unsigned char *e_ident)
 {
 	printf("  Class:                             ");
 
@@ -77,7 +77,7 @@ __home void print_class(unsigned char *e_ident)
  * print_data - Prints the data of an ELF header.
  * @e_ident: A pointer to an array containing the ELF class.
  */
-__home void print_data(unsigned char *e_ident)
+void print_data(unsigned char *e_ident)
 {
 	printf("  Data:                              ");
 
