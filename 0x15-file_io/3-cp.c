@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * open_from - opens a file for reading
- * @file: name of the file to open
+ * open_from - Opens a file for reading
+ * @file: Name of the file to open
  *
- * Return: file descriptor of the opened file
+ * Return: File descriptor of the opened file
  */
 int open_from(const char *file)
 {
@@ -20,10 +20,10 @@ int open_from(const char *file)
 }
 
 /**
- * open_to - opens a file for writing
- * @file: name of the file to open
+ * open_to - Opens a file for writing
+ * @file: Name of the file to open
  *
- * Return: file descriptor of the opened file
+ * Return: File descriptor of the opened file
  */
 int open_to(const char *file)
 {
@@ -34,14 +34,13 @@ int open_to(const char *file)
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
 		exit(99);
 	}
-
 	return (fd_to);
 }
 
 /**
- * copy_content - copies the content of one file to another
- * @fd_from: file descriptor of the source file
- * @fd_to: file descriptor of the destination file
+ * copy_content - Copies the content of one file to another
+ * @fd_from: File descriptor of the source file
+ * @fd_to: File descriptor of the destination file
  */
 void copy_content(int fd_from, int fd_to)
 {
@@ -55,7 +54,6 @@ void copy_content(int fd_from, int fd_to)
 			dprintf(STDERR_FILENO, "Error: Can't read from file %d\n", fd_from);
 			exit(98);
 		}
-
 		wr = write(fd_to, buffer, rd);
 		if (wr == -1)
 		{
@@ -66,9 +64,9 @@ void copy_content(int fd_from, int fd_to)
 }
 
 /**
- * close_files - closes file descriptors
- * @fd_from: file descriptor of the source file
- * @fd_to: file descriptor of the destination file
+ * close_files - Closes file descriptors
+ * @fd_from: File descriptor of the source file
+ * @fd_to: File descriptor of the destination file
  */
 void close_files(int fd_from, int fd_to)
 {
@@ -82,9 +80,9 @@ void close_files(int fd_from, int fd_to)
 }
 
 /**
- * main - copies the content of a file to another file
- * @ac: number of arguments
- * @av: array of arguments
+ * main - Copies the content of a file to another file
+ * @ac: Number of arguments
+ * @av: Array of arguments
  *
  * Return: 0 on success
  */
@@ -92,8 +90,6 @@ int main(int ac, char **av)
 {
 	int fd_from;
 	int fd_to;
-
-	umask(0000);
 
 	if (ac != 3)
 	{
@@ -105,8 +101,6 @@ int main(int ac, char **av)
 	fd_to = open_to(av[2]);
 
 	copy_content(fd_from, fd_to);
-
 	close_files(fd_from, fd_to);
-
 	return (0);
 }
